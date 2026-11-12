@@ -1,0 +1,7 @@
+# Secrets for `npm run preview` (the local Workers runtime). Copy to .dev.vars.
+# Leave a line out (or empty) to keep that part in demo mode.
+# `npm run dev` does not read this file; it uses .env.local (see .env.example).
+PAYPAL_CLIENT_ID=
+PAYPAL_CLIENT_SECRET=
+ANTHROPIC_API_KEY=
+AI_MODEL=

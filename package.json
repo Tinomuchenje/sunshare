@@ -6,9 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
+    "db:seed:sql": "node --experimental-strip-types scripts/seed-sql.ts",
+    "db:seed:local": "node --experimental-strip-types scripts/seed-sql.ts .wrangler/seed.sql && wrangler d1 execute DB --local --file .wrangler/seed.sql",
+    "db:seed:remote": "node --experimental-strip-types scripts/seed-sql.ts .wrangler/seed.sql && wrangler d1 execute DB --remote --file .wrangler/seed.sql"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.20.16",
+    "geist": "^1.9.2",
+    "lucide-react": "^1.72.0",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0"
@@ -21,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.160.0"
   }
 }

@@ -1,0 +1,31 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "sunshare",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-11-10",
+	// Required by the OpenNext Cloudflare adapter.
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference used by the adapter; the service name must match the worker name.
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "sunshare"
+		}
+	],
+	"d1_databases": [
+		{
+			// The app uses D1 whenever this binding exists (src/lib/store.ts).
+			"binding": "DB",
+			"database_name": "sunshare",
+			// PLACEHOLDER: replace with the database_id printed by
+			// `npx wrangler d1 create sunshare` before any --remote command or deploy
+			// (docs/DEPLOY.md, step 3). Local preview works with the placeholder.
+			"database_id": "00000000-0000-0000-0000-000000000000",
+			"migrations_dir": "migrations"
+		}
+	]
+}
