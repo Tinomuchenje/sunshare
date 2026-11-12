@@ -66,8 +66,11 @@ export async function readMeter(
   const fault = scenario === "underperform" ? FAULTS[Math.floor(rand() * FAULTS.length)] : null;
   const pctText = `${Math.round(performance * 100)}%`;
 
+  // If the AI call fails, fall back to the rule-based note so a month can still be run.
   const note = useAi
-    ? await aiNote(p, month, forecast, actualKwh, pctText, health, fault)
+    ? await aiNote(p, month, forecast, actualKwh, pctText, health, fault).catch(() =>
+        rulesNote(pctText, health, fault),
+      )
     : rulesNote(pctText, health, fault);
 
   const reading = { forecastKwh: forecast, actualKwh, performance, health, note };
